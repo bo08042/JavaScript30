@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+  <style>
+    body{
+      position: relative;
+    }
+    .title{
+      font-family: '微軟正黑體',sans-serif;
+      padding: 0.5rem 2rem;
+    }
+    p{
+      position: relative !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">
+    <h3>重複輸入 "rainbow" 以觸發特效</h3>
+    <h4>已輸入：<span class="input"></span></h4>
+  </div>
+  <script>
+    const pressed=[];
+    const secretCode='rainbow';
+    window.addEventListener('keyup',(e)=>{
+      console.log(e.key);
+      pressed.push(e.key);
+      pressed.splice(-secretCode.length-1,pressed.length-secretCode.length); // splice(num,num)
+      if(pressed.join('').includes(secretCode)){
+        console.log('DING DING');
+        cornify_add();
+      }
+      console.log(pressed);
+      document.querySelector('.input').innerHTML=pressed.join('-');
+    });
+  </script>
+</body>
+</html>
